@@ -19,6 +19,7 @@ class TempConvertApp extends StatelessWidget {
         ),
       ),
       home: const TempConvertHome(),
+      debugShowCheckedModeBanner: false, // This line removes the debug banner
     );
   }
 }
