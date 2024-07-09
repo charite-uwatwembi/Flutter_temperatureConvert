@@ -10,7 +10,7 @@ class TempConvertApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TempConvert',
+      title: 'Temperature Converter',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
         scaffoldBackgroundColor: Colors.white,
@@ -19,7 +19,7 @@ class TempConvertApp extends StatelessWidget {
         ),
       ),
       home: const TempConvertHome(),
-      debugShowCheckedModeBanner: false, // This line removes the debug banner
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -32,7 +32,7 @@ class TempConvertHome extends StatefulWidget {
 }
 
 class _TempConvertHomeState extends State<TempConvertHome> {
-  String _selectedConversion = 'F to C';
+  String _selectedConversion = 'Fahrenheit to Celsius';
   String? _convertedTemperature;
   final List<String> _history = [];
   final TextEditingController _controller = TextEditingController();
@@ -43,7 +43,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
 
     double convertedTemp;
     String result;
-    if (_selectedConversion == 'F to C') {
+    if (_selectedConversion == 'Fahrenheit to Celsius') {
       convertedTemp = (inputTemp - 32) * 5 / 9;
       result = '${inputTemp.toStringAsFixed(1)}°F = ${convertedTemp.toStringAsFixed(2)}°C';
     } else {
@@ -61,12 +61,14 @@ class _TempConvertHomeState extends State<TempConvertHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TempConvert', style: TextStyle(color: Colors.white)),
+        title: const Text('Temperature Converter', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.lightBlue,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               'Select Conversion',
@@ -76,7 +78,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Radio<String>(
-                  value: 'F to C',
+                  value: 'Fahrenheit to Celsius',
                   groupValue: _selectedConversion,
                   onChanged: (value) {
                     setState(() {
@@ -84,9 +86,9 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                     });
                   },
                 ),
-                const Text('F to C', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                const Text('Fahrenheit to Celsius', style: TextStyle(fontSize: 16, color: Colors.black87)),
                 Radio<String>(
-                  value: 'C to F',
+                  value: 'Celsius to Fahrenheit',
                   groupValue: _selectedConversion,
                   onChanged: (value) {
                     setState(() {
@@ -94,7 +96,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                     });
                   },
                 ),
-                const Text('C to F', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                const Text('Celsius to Fahrenheit', style: TextStyle(fontSize: 16, color: Colors.black87)),
               ],
             ),
             TextField(
@@ -129,10 +131,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
               ),
             ],
             const SizedBox(height: 16),
-            const Text(
-              'History',
-              style: TextStyle(fontSize: 20, color: Colors.lightBlue),
-            ),
+            
             Expanded(
               child: ListView.builder(
                 itemCount: _history.length,
