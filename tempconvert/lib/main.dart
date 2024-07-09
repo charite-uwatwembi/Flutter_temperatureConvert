@@ -65,87 +65,89 @@ class _TempConvertHomeState extends State<TempConvertHome> {
         backgroundColor: Colors.lightBlue,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Select Conversion',
-              style: TextStyle(fontSize: 20, color: Colors.lightBlue),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Radio<String>(
-                  value: 'Fahrenheit to Celsius',
-                  groupValue: _selectedConversion,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedConversion = value!;
-                    });
-                  },
-                ),
-                const Text('Fahrenheit to Celsius', style: TextStyle(fontSize: 16, color: Colors.black87)),
-                Radio<String>(
-                  value: 'Celsius to Fahrenheit',
-                  groupValue: _selectedConversion,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedConversion = value!;
-                    });
-                  },
-                ),
-                const Text('Celsius to Fahrenheit', style: TextStyle(fontSize: 16, color: Colors.black87)),
-              ],
-            ),
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                labelText: 'Enter Temperature',
-                labelStyle: TextStyle(color: Colors.lightBlue),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlue),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlue),
-                ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Select Conversion',
+                style: TextStyle(fontSize: 20, color: Colors.lightBlue),
               ),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _convertTemperature,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlue,
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Radio<String>(
+                    value: 'Fahrenheit to Celsius',
+                    groupValue: _selectedConversion,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedConversion = value!;
+                      });
+                    },
+                  ),
+                  const Text('F to C', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                  Radio<String>(
+                    value: 'Celsius to Fahrenheit',
+                    groupValue: _selectedConversion,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedConversion = value!;
+                      });
+                    },
+                  ),
+                  const Text('C to F', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                ],
               ),
-              child: const Text('Convert'),
-            ),
-            if (_convertedTemperature != null) ...[
+              TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                  labelText: 'Enter Temperature',
+                  labelStyle: TextStyle(color: Colors.lightBlue),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.lightBlue),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.lightBlue),
+                  ),
+                ),
+                keyboardType: TextInputType.number,
+              ),
               const SizedBox(height: 16),
-              Text(
-                'Converted Temperature: $_convertedTemperature',
-                style: const TextStyle(fontSize: 20, color: Colors.lightBlue),
+              ElevatedButton(
+                onPressed: _convertTemperature,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.lightBlue,
+                  foregroundColor: Colors.white,
+                  textStyle: const TextStyle(fontSize: 16),
+                ),
+                child: const Text('Convert'),
+              ),
+              if (_convertedTemperature != null) ...[
+                const SizedBox(height: 16),
+                Text(
+                  'Converted Temperature: $_convertedTemperature',
+                  style: const TextStyle(fontSize: 20, color: Colors.lightBlue),
+                ),
+              ],
+              const SizedBox(height: 16),
+              
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _history.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        _history[index],
+                        style: const TextStyle(color: Colors.black87),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
-            const SizedBox(height: 16),
-            
-            Expanded(
-              child: ListView.builder(
-                itemCount: _history.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      _history[index],
-                      style: const TextStyle(color: Colors.black87),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
