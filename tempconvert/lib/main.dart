@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(TempConvertApp());
+  runApp(const TempConvertApp());
 }
 
 class TempConvertApp extends StatelessWidget {
+  const TempConvertApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TempConvert',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightBlue,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black87),
+        ),
       ),
-      home: TempConvertHome(),
+      home: const TempConvertHome(),
     );
   }
 }
 
 class TempConvertHome extends StatefulWidget {
+  const TempConvertHome({Key? key}) : super(key: key);
+
   @override
   _TempConvertHomeState createState() => _TempConvertHomeState();
 }
 
 class _TempConvertHomeState extends State<TempConvertHome> {
   String _selectedConversion = 'F to C';
-  double? _inputTemperature;
   String? _convertedTemperature;
   final List<String> _history = [];
-
   final TextEditingController _controller = TextEditingController();
 
   void _convertTemperature() {
@@ -54,15 +60,16 @@ class _TempConvertHomeState extends State<TempConvertHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TempConvert'),
+        title: const Text('TempConvert', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.lightBlue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Select Conversion',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.lightBlue),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +83,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                     });
                   },
                 ),
-                Text('F to C'),
+                const Text('F to C', style: TextStyle(fontSize: 16, color: Colors.black87)),
                 Radio<String>(
                   value: 'C to F',
                   groupValue: _selectedConversion,
@@ -86,40 +93,54 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                     });
                   },
                 ),
-                Text('C to F'),
+                const Text('C to F', style: TextStyle(fontSize: 16, color: Colors.black87)),
               ],
             ),
             TextField(
               controller: _controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Enter Temperature',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.lightBlue),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.lightBlue),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.lightBlue),
+                ),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _convertTemperature,
-              child: Text('Convert'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.lightBlue,
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+              child: const Text('Convert'),
             ),
             if (_convertedTemperature != null) ...[
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Converted Temperature: $_convertedTemperature',
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20, color: Colors.lightBlue),
               ),
             ],
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'History',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.lightBlue),
             ),
             Expanded(
               child: ListView.builder(
                 itemCount: _history.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(_history[index]),
+                    title: Text(
+                      _history[index],
+                      style: const TextStyle(color: Colors.black87),
+                    ),
                   );
                 },
               ),
