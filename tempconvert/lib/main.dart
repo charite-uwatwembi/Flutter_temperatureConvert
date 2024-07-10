@@ -87,7 +87,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                       });
                     },
                   ),
-                  const Text('F to C', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                  const Text('F to C', style: TextStyle(fontSize: 18, color: Colors.black87)),
                   Radio<String>(
                     value: 'Celsius to Fahrenheit',
                     groupValue: _selectedConversion,
