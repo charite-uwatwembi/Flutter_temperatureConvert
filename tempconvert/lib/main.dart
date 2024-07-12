@@ -79,26 +79,30 @@ class _TempConvertHomeState extends State<TempConvertHome> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Radio<String>(
-                    value: 'Fahrenheit to Celsius',
-                    groupValue: _selectedConversion,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedConversion = value!;
-                      });
-                    },
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: const Text('F to C'),
+                      value: 'Fahrenheit to Celsius',
+                      groupValue: _selectedConversion,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedConversion = value!;
+                        });
+                      },
+                    ),
                   ),
-                  const Text('Fahrenheit to Celsius', style: TextStyle(fontSize: 18, color: Colors.black87)),
-                  Radio<String>(
-                    value: 'Celsius to Fahrenheit',
-                    groupValue: _selectedConversion,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedConversion = value!;
-                      });
-                    },
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: const Text('C to F'),
+                      value: 'Celsius to Fahrenheit',
+                      groupValue: _selectedConversion,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedConversion = value!;
+                        });
+                      },
+                    ),
                   ),
-                  const Text('Celsius to Fahrenheit', style: TextStyle(fontSize: 18, color: Colors.black87)),
                 ],
               ),
               const SizedBox(height: 20),
