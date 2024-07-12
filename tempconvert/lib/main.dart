@@ -115,6 +115,11 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
+                const Text(
+                  'C stands for Celsius and F stands for Fahrenheit',
+                  style: TextStyle(fontSize: 16, color: Colors.lightBlue),
+                ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: _controller,
