@@ -66,102 +66,118 @@ class _TempConvertHomeState extends State<TempConvertHome> {
         centerTitle: true,
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Select Conversion',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: RadioListTile<String>(
-                      title: const Text('F to C'),
-                      value: 'Fahrenheit to Celsius',
-                      groupValue: _selectedConversion,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedConversion = value!;
-                        });
-                      },
-                    ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.thermostat, size: 100, color: Colors.lightBlue),
+                const SizedBox(height: 20),
+                const Text(
+                  'Select Conversion',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.lightBlue),
                   ),
-                  Expanded(
-                    child: RadioListTile<String>(
-                      title: const Text('C to F'),
-                      value: 'Celsius to Fahrenheit',
-                      groupValue: _selectedConversion,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedConversion = value!;
-                        });
-                      },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: RadioListTile<String>(
+                          title: const Text('F to C'),
+                          value: 'Fahrenheit to Celsius',
+                          groupValue: _selectedConversion,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedConversion = value!;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile<String>(
+                          title: const Text('C to F'),
+                          value: 'Celsius to Fahrenheit',
+                          groupValue: _selectedConversion,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedConversion = value!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    labelText: 'Enter Temperature',
+                    labelStyle: const TextStyle(color: Colors.lightBlue),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.lightBlue),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.lightBlue),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    prefixIcon: const Icon(Icons.thermostat, color: Colors.lightBlue),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: _convertTemperature,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightBlue,
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  icon: const Icon(Icons.sync_alt),
+                  label: const Text('Convert'),
+                ),
+                if (_convertedTemperature != null) ...[
+                  const SizedBox(height: 20),
+                  Text(
+                    'Converted Temperature: $_convertedTemperature',
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
                   ),
                 ],
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  labelText: 'Enter Temperature',
-                  labelStyle: const TextStyle(color: Colors.lightBlue),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.lightBlue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.lightBlue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  prefixIcon: const Icon(Icons.thermostat, color: Colors.lightBlue),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: _convertTemperature,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightBlue,
-                  foregroundColor: Colors.white,
-                  textStyle: const TextStyle(fontSize: 16),
-                ),
-                icon: const Icon(Icons.sync_alt),
-                label: const Text('Convert'),
-              ),
-              if (_convertedTemperature != null) ...[
                 const SizedBox(height: 20),
-                Text(
-                  'Converted Temperature: $_convertedTemperature',
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                const Text(
+                  'Conversion History',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  height: 150, // Fixed height for the history list
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.lightBlue),
+                  ),
+                  child: ListView.builder(
+                    itemCount: _history.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: const Icon(Icons.history, color: Colors.lightBlue),
+                        title: Text(
+                          _history[index],
+                          style: const TextStyle(color: Colors.black87),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
-              const SizedBox(height: 20),
-              const Text(
-                'Conversion History',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
-              ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _history.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: const Icon(Icons.history, color: Colors.lightBlue),
-                      title: Text(
-                        _history[index],
-                        style: const TextStyle(color: Colors.black87),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
