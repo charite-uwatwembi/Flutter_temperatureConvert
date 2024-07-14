@@ -12,7 +12,7 @@ class TempConvertApp extends StatelessWidget {
     return MaterialApp(
       title: 'Temperature Converter',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.green,
         scaffoldBackgroundColor: Colors.white,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(color: Colors.black87),
@@ -62,7 +62,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Temperature Converter', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Center(
@@ -73,17 +73,17 @@ class _TempConvertHomeState extends State<TempConvertHome> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.thermostat, size: 100, color: Colors.lightBlue),
+                const Icon(Icons.thermostat, size: 100, color: Colors.green),
                 const SizedBox(height: 20),
                 const Text(
                   'Select Conversion',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.lightBlue),
+                    border: Border.all(color: Colors.green),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -118,23 +118,23 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                 const SizedBox(height: 10),
                 const Text(
                   'C stands for Celsius and F stands for Fahrenheit',
-                  style: TextStyle(fontSize: 16, color: Colors.lightBlue),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: _controller,
                   decoration: InputDecoration(
                     labelText: 'Enter Temperature',
-                    labelStyle: const TextStyle(color: Colors.lightBlue),
+                    labelStyle: const TextStyle(color: Colors.green),
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.lightBlue),
+                      borderSide: const BorderSide(color: Colors.green),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.lightBlue),
+                      borderSide: const BorderSide(color: Colors.green),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    prefixIcon: const Icon(Icons.thermostat, color: Colors.lightBlue),
+                    prefixIcon: const Icon(Icons.thermostat, color: Colors.green),
                   ),
                   keyboardType: TextInputType.number,
                 ),
@@ -142,7 +142,7 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                 ElevatedButton.icon(
                   onPressed: _convertTemperature,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue,
+                    backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
                     textStyle: const TextStyle(fontSize: 16),
                   ),
@@ -153,26 +153,26 @@ class _TempConvertHomeState extends State<TempConvertHome> {
                   const SizedBox(height: 20),
                   Text(
                     'Converted Temperature: $_convertedTemperature',
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green),
                   ),
                 ],
                 const SizedBox(height: 20),
                 const Text(
                   'Conversion History',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   height: 150, // Fixed height for the history list
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.lightBlue),
+                    border: Border.all(color: Colors.green),
                   ),
                   child: ListView.builder(
                     itemCount: _history.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: const Icon(Icons.history, color: Colors.lightBlue),
+                        leading: const Icon(Icons.history, color: Colors.green),
                         title: Text(
                           _history[index],
                           style: const TextStyle(color: Colors.black87),
